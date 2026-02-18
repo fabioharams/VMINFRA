@@ -17,7 +17,7 @@ param adminPassword string
 param vmCount int = 3
 
 @description('VM size')
-param vmSize string = 'Standard_D2as_v7'
+param vmSize string = 'Standard_D2as_v5'
 
 @description('Base name prefix for VMs')
 param vmNamePrefix string = 'vm'

@@ -7,13 +7,13 @@ This template is ideal for anyone who wants to quickly spin up a demo environmen
 ## Architecture
 
 ### Brazil South
-- **3x Virtual Machines** (`vm-1`, `vm-2`, `vm-3`) — `Standard_D2as_v7`, Windows Server 2022 Datacenter Gen2
+- **3x Virtual Machines** (`vm-1`, `vm-2`, `vm-3`) — `Standard_D2as_v5`, Windows Server 2022 Datacenter Gen2
 - **1x Virtual Network** `vnet-brazilsouth` — `10.0.0.0/16`
 - **3x Subnets** — `snet-1` (`10.0.1.0/24`), `snet-2` (`10.0.2.0/24`), `snet-3` (`10.0.3.0/24`) — one VM per subnet
 - **Network Security Group** — attached to all subnets
 
 ### Sweden Central
-- **1x Virtual Machine** (`vm-swedencentral`) — `Standard_D2as_v7`, Windows Server 2025 Datacenter Gen2
+- **1x Virtual Machine** (`vm-swedencentral`) — `Standard_D2as_v5`, Windows Server 2025 Datacenter Gen2
 - **1x Virtual Network** `vnet-swedencentral` — `10.1.0.0/16`
 - **1x Subnet** — `snet-swedencentral` (`10.1.0.0/24`)
 - **Network Security Group** — attached to the subnet
@@ -64,7 +64,7 @@ This template is ideal for anyone who wants to quickly spin up a demo environmen
 | `location`          | `brazilsouth`        | Azure region for the Brazil South VMs              |
 | `resourceGroupName` | `rg-vminfra`         | Resource group name                                |
 | `vmCount`           | `3`                  | Number of VMs to deploy in Brazil South            |
-| `vmSize`            | `Standard_D2as_v7`   | VM instance size (all VMs)                         |
+| `vmSize`            | `Standard_D2as_v5`   | VM instance size (all VMs)                         |
 | `vmNamePrefix`      | `vm`                 | Prefix for Brazil South VM names (vm-1, vm-2, vm-3)|
 | `adminUsername`      | *(env var)*          | Administrator username for all VMs                 |
 | `adminPassword`      | *(env var)*          | Administrator password for all VMs                 |
