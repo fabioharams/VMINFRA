@@ -1,13 +1,24 @@
 # VM Infrastructure - Azure Developer CLI Template
 
-This `azd` template deploys **3 Windows Server 2022 Datacenter (Gen2)** virtual machines on Azure.
+This `azd` template deploys **4 Windows Server virtual machines** across two Azure regions with private networking and global VNet peering.
 
 ## Architecture
 
-- **3x Virtual Machines** — `Standard_D2as_v7` in Brazil South
-- **1x Virtual Network** — `10.0.0.0/16` with a default subnet `10.0.0.0/24`
+### Brazil South
+- **3x Virtual Machines** (`vm-1`, `vm-2`, `vm-3`) — `Standard_D2as_v7`, Windows Server 2022 Datacenter Gen2
+- **1x Virtual Network** `vnet-vminfra` — `10.0.0.0/16`
+- **3x Subnets** — `snet-1` (`10.0.1.0/24`), `snet-2` (`10.0.2.0/24`), `snet-3` (`10.0.3.0/24`) — one VM per subnet
+- **Network Security Group** — attached to all subnets
+
+### Sweden Central
+- **1x Virtual Machine** (`vm-swedencentral`) — `Standard_D2as_v7`, Windows Server 2025 Datacenter Gen2
+- **1x Virtual Network** `vnet-swedencentral` — `10.1.0.0/16`
+- **1x Subnet** — `snet-swedencentral` (`10.1.0.0/24`)
 - **Network Security Group** — attached to the subnet
-- **No public IP addresses** — VMs are only accessible via private IPs
+
+### Cross-Region Connectivity
+- **Global VNet Peering** — bidirectional peering between `vnet-vminfra` and `vnet-swedencentral`
+- **No public IP addresses** — all VMs are only accessible via private IPs
 
 ## Prerequisites
 
