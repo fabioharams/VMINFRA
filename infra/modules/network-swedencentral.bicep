@@ -4,6 +4,35 @@ param location string
 var vnetName = 'vnet-swedencentral'
 var subnetName = 'snet-swedencentral'
 var nsgName = 'nsg-swedencentral'
+var natGatewayName = 'natgw-swedencentral'
+var publicIpName = 'pip-natgw-swedencentral'
+
+resource publicIp 'Microsoft.Network/publicIPAddresses@2024-01-01' = {
+  name: publicIpName
+  location: location
+  sku: {
+    name: 'Standard'
+  }
+  properties: {
+    publicIPAllocationMethod: 'Static'
+  }
+}
+
+resource natGateway 'Microsoft.Network/natGateways@2024-01-01' = {
+  name: natGatewayName
+  location: location
+  sku: {
+    name: 'Standard'
+  }
+  properties: {
+    idleTimeoutInMinutes: 4
+    publicIpAddresses: [
+      {
+        id: publicIp.id
+      }
+    ]
+  }
+}
 
 resource nsg 'Microsoft.Network/networkSecurityGroups@2024-01-01' = {
   name: nsgName
@@ -46,6 +75,9 @@ resource subnet 'Microsoft.Network/virtualNetworks/subnets@2024-01-01' = {
     addressPrefix: '10.1.0.0/24'
     networkSecurityGroup: {
       id: nsg.id
+    }
+    natGateway: {
+      id: natGateway.id
     }
   }
 }

@@ -6,6 +6,35 @@ param subnetCount int = 3
 
 var vnetName = 'vnet-brazilsouth'
 var nsgName = 'nsg-default'
+var natGatewayName = 'natgw-brazilsouth'
+var publicIpName = 'pip-natgw-brazilsouth'
+
+resource publicIp 'Microsoft.Network/publicIPAddresses@2024-01-01' = {
+  name: publicIpName
+  location: location
+  sku: {
+    name: 'Standard'
+  }
+  properties: {
+    publicIPAllocationMethod: 'Static'
+  }
+}
+
+resource natGateway 'Microsoft.Network/natGateways@2024-01-01' = {
+  name: natGatewayName
+  location: location
+  sku: {
+    name: 'Standard'
+  }
+  properties: {
+    idleTimeoutInMinutes: 4
+    publicIpAddresses: [
+      {
+        id: publicIp.id
+      }
+    ]
+  }
+}
 
 resource nsg 'Microsoft.Network/networkSecurityGroups@2024-01-01' = {
   name: nsgName
@@ -49,6 +78,9 @@ resource subnets 'Microsoft.Network/virtualNetworks/subnets@2024-01-01' = [for i
     addressPrefix: '10.0.${i}.0/24'
     networkSecurityGroup: {
       id: nsg.id
+    }
+    natGateway: {
+      id: natGateway.id
     }
   }
 }]

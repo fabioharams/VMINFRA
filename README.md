@@ -10,12 +10,14 @@ This template is ideal for anyone who wants to quickly spin up a demo environmen
 - **3x Virtual Machines** (`vm-1`, `vm-2`, `vm-3`) — `Standard_D2as_v5`, Windows Server 2022 Datacenter Gen2
 - **1x Virtual Network** `vnet-brazilsouth` — `10.0.0.0/16`
 - **3x Subnets** — `snet-1` (`10.0.1.0/24`), `snet-2` (`10.0.2.0/24`), `snet-3` (`10.0.3.0/24`) — one VM per subnet
+- **NAT Gateway** `natgw-brazilsouth` — with static public IP (`pip-natgw-brazilsouth`) for outbound internet
 - **Network Security Group** — attached to all subnets
 
 ### Sweden Central
 - **1x Virtual Machine** (`vm-sweden1`) — `Standard_D2as_v5`, Windows Server 2025 Datacenter Gen2
 - **1x Virtual Network** `vnet-swedencentral` — `10.1.0.0/16`
 - **1x Subnet** — `snet-swedencentral` (`10.1.0.0/24`)
+- **NAT Gateway** `natgw-swedencentral` — with static public IP (`pip-natgw-swedencentral`) for outbound internet
 - **Network Security Group** — attached to the subnet
 
 ### Cross-Region Connectivity
@@ -71,10 +73,10 @@ This template is ideal for anyone who wants to quickly spin up a demo environmen
 
 ### Networks
 
-| VNet                  | Address Space  | Region          | Subnets                                                        |
-|-----------------------|----------------|-----------------|----------------------------------------------------------------|
-| `vnet-brazilsouth`    | `10.0.0.0/16`  | Brazil South    | `snet-1` (`10.0.1.0/24`), `snet-2` (`10.0.2.0/24`), `snet-3` (`10.0.3.0/24`) |
-| `vnet-swedencentral`  | `10.1.0.0/16`  | Sweden Central  | `snet-swedencentral` (`10.1.0.0/24`)                           |
+| VNet                  | Address Space  | Region          | Subnets                                                        | NAT Gateway            |
+|-----------------------|----------------|-----------------|----------------------------------------------------------------|------------------------|
+| `vnet-brazilsouth`    | `10.0.0.0/16`  | Brazil South    | `snet-1` (`10.0.1.0/24`), `snet-2` (`10.0.2.0/24`), `snet-3` (`10.0.3.0/24`) | `natgw-brazilsouth`   |
+| `vnet-swedencentral`  | `10.1.0.0/16`  | Sweden Central  | `snet-swedencentral` (`10.1.0.0/24`)                           | `natgw-swedencentral`  |
 
 ### Virtual Machines
 
