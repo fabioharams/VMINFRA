@@ -48,10 +48,30 @@ This `azd` template deploys **4 Windows Server virtual machines** across two Azu
 
 ## Configuration
 
-| Parameter           | Default              | Description                        |
-|---------------------|----------------------|------------------------------------|
-| `location`          | `brazilsouth`        | Azure region                       |
-| `resourceGroupName` | `rg-vminfra`         | Resource group name                |
-| `vmCount`           | `3`                  | Number of VMs to deploy            |
-| `vmSize`            | `Standard_D2as_v7`   | VM instance size                   |
-| `vmNamePrefix`      | `vm`                 | Prefix for VM names (vm-1, vm-2…)  |
+### Main Parameters
+
+| Parameter           | Default              | Description                                       |
+|---------------------|----------------------|---------------------------------------------------|
+| `location`          | `brazilsouth`        | Azure region for the Brazil South VMs              |
+| `resourceGroupName` | `rg-vminfra`         | Resource group name                                |
+| `vmCount`           | `3`                  | Number of VMs to deploy in Brazil South            |
+| `vmSize`            | `Standard_D2as_v7`   | VM instance size (all VMs)                         |
+| `vmNamePrefix`      | `vm`                 | Prefix for Brazil South VM names (vm-1, vm-2, vm-3)|
+| `adminUsername`      | *(env var)*          | Administrator username for all VMs                 |
+| `adminPassword`      | *(env var)*          | Administrator password for all VMs                 |
+
+### Networks
+
+| VNet                  | Address Space  | Region          | Subnets                                                        |
+|-----------------------|----------------|-----------------|----------------------------------------------------------------|
+| `vnet-brazilsouth`    | `10.0.0.0/16`  | Brazil South    | `snet-1` (`10.0.1.0/24`), `snet-2` (`10.0.2.0/24`), `snet-3` (`10.0.3.0/24`) |
+| `vnet-swedencentral`  | `10.1.0.0/16`  | Sweden Central  | `snet-swedencentral` (`10.1.0.0/24`)                           |
+
+### Virtual Machines
+
+| VM Name             | Region          | OS Image                              | Subnet                |
+|---------------------|-----------------|---------------------------------------|------------------------|
+| `vm-1`              | Brazil South    | Windows Server 2022 Datacenter Gen2   | `snet-1`               |
+| `vm-2`              | Brazil South    | Windows Server 2022 Datacenter Gen2   | `snet-2`               |
+| `vm-3`              | Brazil South    | Windows Server 2022 Datacenter Gen2   | `snet-3`               |
+| `vm-swedencentral`  | Sweden Central  | Windows Server 2025 Datacenter Gen2   | `snet-swedencentral`   |
