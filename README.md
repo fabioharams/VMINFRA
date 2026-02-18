@@ -29,20 +29,27 @@ This template is ideal for anyone who wants to quickly spin up a demo environmen
 
 ## Getting Started
 
-1. **Set environment variables** for the VM admin credentials:
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/fabioharams/VMINFRA.git
+   cd VMINFRA
+   ```
+
+2. **Set environment variables** for the VM admin credentials:
 
    ```bash
    azd env set AZURE_VM_ADMIN_USERNAME <your-username>
    azd env set AZURE_VM_ADMIN_PASSWORD <your-secure-password>
    ```
 
-2. **Provision the infrastructure**:
+3. **Provision the infrastructure**:
 
    ```bash
    azd up
    ```
 
-3. **Clean up** when done:
+4. **Clean up** when done:
 
    ```bash
    azd down
