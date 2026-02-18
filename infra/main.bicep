@@ -48,3 +48,36 @@ module virtualMachines 'modules/vm.bicep' = [
     }
   }
 ]
+
+// Sweden Central resources
+module networkSwedenCentral 'modules/network-swedencentral.bicep' = {
+  scope: rg
+  params: {
+    location: 'swedencentral'
+  }
+}
+
+module vmSwedenCentral 'modules/vm.bicep' = {
+  scope: rg
+  params: {
+    location: 'swedencentral'
+    vmName: 'vm-swedencentral'
+    vmSize: vmSize
+    adminUsername: adminUsername
+    adminPassword: adminPassword
+    subnetId: networkSwedenCentral.outputs.subnetId
+    imageOffer: 'WindowsServer'
+    imageSku: '2025-datacenter-g2'
+  }
+}
+
+// Global VNet peering between Brazil South and Sweden Central
+module vnetPeering 'modules/peering.bicep' = {
+  scope: rg
+  params: {
+    vnet1Name: network.outputs.vnetName
+    vnet2Name: networkSwedenCentral.outputs.vnetName
+    vnet1Id: network.outputs.vnetId
+    vnet2Id: networkSwedenCentral.outputs.vnetId
+  }
+}

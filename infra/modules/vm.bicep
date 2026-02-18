@@ -17,6 +17,12 @@ param adminPassword string
 @description('Resource ID of the subnet to attach the NIC to')
 param subnetId string
 
+@description('Windows Server image offer')
+param imageOffer string = 'WindowsServer'
+
+@description('Windows Server image SKU')
+param imageSku string = '2022-datacenter-g2'
+
 var nicName = 'nic-${vmName}'
 var osDiskName = 'osdisk-${vmName}'
 
@@ -53,8 +59,8 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-07-01' = {
     storageProfile: {
       imageReference: {
         publisher: 'MicrosoftWindowsServer'
-        offer: 'WindowsServer'
-        sku: '2022-datacenter-g2'
+        offer: imageOffer
+        sku: imageSku
         version: 'latest'
       }
       osDisk: {
