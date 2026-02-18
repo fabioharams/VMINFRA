@@ -1,8 +1,10 @@
 @description('Azure region for the network resources')
 param location string
 
+@description('Number of subnets to create (one per VM)')
+param subnetCount int = 3
+
 var vnetName = 'vnet-vminfra'
-var subnetName = 'snet-default'
 var nsgName = 'nsg-default'
 
 resource nsg 'Microsoft.Network/networkSecurityGroups@2024-01-01' = {
@@ -39,16 +41,17 @@ resource vnet 'Microsoft.Network/virtualNetworks@2024-01-01' = {
   }
 }
 
-resource subnet 'Microsoft.Network/virtualNetworks/subnets@2024-01-01' = {
+@batchSize(1)
+resource subnets 'Microsoft.Network/virtualNetworks/subnets@2024-01-01' = [for i in range(1, subnetCount): {
   parent: vnet
-  name: subnetName
+  name: 'snet-${i}'
   properties: {
-    addressPrefix: '10.0.0.0/24'
+    addressPrefix: '10.0.${i}.0/24'
     networkSecurityGroup: {
       id: nsg.id
     }
   }
-}
+}]
 
-@description('Resource ID of the subnet')
-output subnetId string = subnet.id
+@description('Resource IDs of the subnets')
+output subnetIds string[] = [for i in range(0, subnetCount): subnets[i].id]

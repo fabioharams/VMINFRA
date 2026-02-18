@@ -31,19 +31,20 @@ module network 'modules/network.bicep' = {
   scope: rg
   params: {
     location: location
+    subnetCount: vmCount
   }
 }
 
 module virtualMachines 'modules/vm.bicep' = [
-  for i in range(1, vmCount): {
+  for i in range(0, vmCount): {
     scope: rg
     params: {
       location: location
-      vmName: '${vmNamePrefix}-${i}'
+      vmName: '${vmNamePrefix}-${i + 1}'
       vmSize: vmSize
       adminUsername: adminUsername
       adminPassword: adminPassword
-      subnetId: network.outputs.subnetId
+      subnetId: network.outputs.subnetIds[i]
     }
   }
 ]
