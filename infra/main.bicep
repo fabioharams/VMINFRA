@@ -61,7 +61,7 @@ module vmSwedenCentral 'modules/vm.bicep' = {
   scope: rg
   params: {
     location: 'swedencentral'
-    vmName: 'vm-swedencentral'
+    vmName: 'vm-sweden1'
     vmSize: vmSize
     adminUsername: adminUsername
     adminPassword: adminPassword

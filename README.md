@@ -13,7 +13,7 @@ This template is ideal for anyone who wants to quickly spin up a demo environmen
 - **Network Security Group** — attached to all subnets
 
 ### Sweden Central
-- **1x Virtual Machine** (`vm-swedencentral`) — `Standard_D2as_v5`, Windows Server 2025 Datacenter Gen2
+- **1x Virtual Machine** (`vm-sweden1`) — `Standard_D2as_v5`, Windows Server 2025 Datacenter Gen2
 - **1x Virtual Network** `vnet-swedencentral` — `10.1.0.0/16`
 - **1x Subnet** — `snet-swedencentral` (`10.1.0.0/24`)
 - **Network Security Group** — attached to the subnet
@@ -83,4 +83,4 @@ This template is ideal for anyone who wants to quickly spin up a demo environmen
 | `vm-1`              | Brazil South    | Windows Server 2022 Datacenter Gen2   | `snet-1`               |
 | `vm-2`              | Brazil South    | Windows Server 2022 Datacenter Gen2   | `snet-2`               |
 | `vm-3`              | Brazil South    | Windows Server 2022 Datacenter Gen2   | `snet-3`               |
-| `vm-swedencentral`  | Sweden Central  | Windows Server 2025 Datacenter Gen2   | `snet-swedencentral`   |
+| `vm-sweden1`        | Sweden Central  | Windows Server 2025 Datacenter Gen2   | `snet-swedencentral`   |
