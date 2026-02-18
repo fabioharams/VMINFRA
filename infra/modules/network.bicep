@@ -4,7 +4,7 @@ param location string
 @description('Number of subnets to create (one per VM)')
 param subnetCount int = 3
 
-var vnetName = 'vnet-vminfra'
+var vnetName = 'vnet-brazilsouth'
 var nsgName = 'nsg-default'
 
 resource nsg 'Microsoft.Network/networkSecurityGroups@2024-01-01' = {
