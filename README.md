@@ -2,6 +2,8 @@
 
 This `azd` template deploys **4 Windows Server virtual machines** across two Azure regions with private networking and global VNet peering.
 
+This template is ideal for anyone who wants to quickly spin up a demo environment to test monitoring solutions. The multi-region, multi-VM setup provides a realistic scenario for evaluating tools like Azure Monitor, Log Analytics, or third-party monitoring agents across different regions and network topologies.
+
 ## Architecture
 
 ### Brazil South
