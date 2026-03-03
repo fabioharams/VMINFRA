@@ -7,6 +7,49 @@ This `azd` template deploys **4 Windows Server virtual machines** across two Azu
 
 This template is ideal for anyone who wants to quickly spin up a demo environment to test monitoring solutions. The multi-region, multi-VM setup provides a realistic scenario for evaluating tools like Azure Monitor, Log Analytics, or third-party monitoring agents across different regions and network topologies.
 
+## Diagram of the solution
+
+```mermaid
+graph TB
+    subgraph AZURE["Azure Subscription"]
+        subgraph RG["rg-vminfra"]
+            subgraph BRAZIL["Brazil South"]
+                subgraph VNETBR["vnet-brazilsouth · 10.0.0.0/16"]
+                    NSGBR["NSG"]
+                    subgraph SNET1["snet-1 · 10.0.1.0/24"]
+                        VM1["vm-1\nWindows Server 2022"]
+                    end
+                    subgraph SNET2["snet-2 · 10.0.2.0/24"]
+                        VM2["vm-2\nWindows Server 2022"]
+                    end
+                    subgraph SNET3["snet-3 · 10.0.3.0/24"]
+                        VM3["vm-3\nWindows Server 2022"]
+                    end
+                end
+                NATGWBR["natgw-brazilsouth"]
+                PIPBR["pip-natgw-brazilsouth\nStatic Public IP"]
+            end
+
+            subgraph SWEDEN["Sweden Central"]
+                subgraph VNETSE["vnet-swedencentral · 10.1.0.0/16"]
+                    NSGSE["NSG"]
+                    subgraph SNETSE["snet-swedencentral · 10.1.0.0/24"]
+                        VM4["vm-sweden1\nWindows Server 2025"]
+                    end
+                end
+                NATGWSE["natgw-swedencentral"]
+                PIPSE["pip-natgw-swedencentral\nStatic Public IP"]
+            end
+        end
+    end
+
+    INTERNET(("Internet"))
+
+    VNETBR <-->|"Global VNet Peering"| VNETSE
+    VNETBR --> NATGWBR --> PIPBR --> INTERNET
+    VNETSE --> NATGWSE --> PIPSE --> INTERNET
+```
+
 ## Architecture
 
 ### Brazil South
