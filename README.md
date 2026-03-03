@@ -1,6 +1,6 @@
 # VM Infrastructure - Azure Developer CLI Template
 
-[![Deploy to Azure](https://aka.ms/deploytoazure)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ffabioharams%2FVMINFRA%2Fmaster%2Finfra%2Fmain.bicep)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ffabioharams%2FVMINFRA%2Fmaster%2Finfra%2Fmain.bicep)
 [![Visualize](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.svg?sanitize=true)](http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Ffabioharams%2FVMINFRA%2Fmaster%2Finfra%2Fmain.bicep)
 
 This `azd` template deploys **4 Windows Server virtual machines** across two Azure regions with private networking and global VNet peering.
